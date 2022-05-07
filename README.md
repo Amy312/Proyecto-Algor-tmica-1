@@ -1,2 +1,2 @@
 # Pruebita
-'los panquesitos dominarán'
+"los panquesitos dominarán el mundo"
