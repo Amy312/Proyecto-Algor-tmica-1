@@ -13,7 +13,7 @@ void menu()
     cout << "2. Elegir punto de partida y destino" << endl;
     cout << "3. Viaje Rápido" << endl;
     cout << "4. Viaje Económico" << endl;
-    cout << "5. Salir del Programa"
+    cout << "5. Salir del Programa" << endl;
     cin >> opcion;
     switch (opcion)
     {
@@ -25,7 +25,7 @@ void menu()
         opcion3();
     case 4:
         opcion4();
-    case 5;
+    case 5:
         salir();
     default:
         cout << ":c Intente de nuevo" << endl;
@@ -49,10 +49,9 @@ void opcion4()
 {
     // 4. Viaje Económico
 }
-
 void salir()
 {
-    // 6. Salir del Programa
+    // 5. Salir del Programa
 }
 
 int main()
