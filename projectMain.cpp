@@ -4,16 +4,72 @@ using namespace std;
 /**
 Menu
 **/
+void lugares(){
+    cout << "1. Campus UPB" << endl;
+    cout << "2. Plaza Humboldt" << endl;
+    cout << "3. MegaCenter" << endl;
+    cout << "4. Iglesia de San Miguel" << endl;
+    cout << "5. UPB Post Grado" << endl;
+    cout << "6. Monobloc UMSA" << endl;
+    cout << "7. Estadio Hernando Siles" <<endl;
+    cout << "8. Plaza del Estudiante" <<endl;
+    cout << "9. Terminal de Buses" <<endl;
+    cout << "10. Aeropuerto Internacional El Alto" <<endl;
+}
+
+void opcion1()
+{
+    // 1. Añadir nueva ruta
+    int ruta;
+    cout << "Elija los caminos por donde realizara su nueva ruta" << endl;
+    lugares();
+    cin >> ruta;
+
+}
+void opcion2()
+{
+    // 2. elegir punto de partida y destino
+    int origen, destino;
+    cout << "Elija el punto de partida y el destino" << endl;
+    lugares();
+    cin >> origen >> destino;
+}
+void opcion3()
+{
+    // 3. Viaje rapido
+    int destino;
+    cout << "Viaje Rápido" << endl;
+    cout << "Elija el punto de destino" << endl;    
+
+}
+void opcion4()
+{
+    // 4. Viaje Económico
+    cout << "El camino mas economico te costara:";
+}
+void salir()
+{
+    // 5. Salir del Programa
+    cout << "Saliendo del Programa" << endl;
+}
+
+
 void menu()
 {
-    int opcion;
-    cout << "   El menu funciona" << endl;
-    cout << "---_---_---_---_---_---_" << endl;
+    cout << "     =Effective Paths=" << endl;
+    cout << "---_---_---_---_---_---_---" << endl;
     cout << "1. Añadir nueva ruta" << endl;
     cout << "2. Elegir punto de partida y destino" << endl;
     cout << "3. Viaje Rápido" << endl;
     cout << "4. Viaje Económico" << endl;
     cout << "5. Salir del Programa" << endl;
+}
+
+int main()
+{
+    //menu();
+        int opcion;
+    menu();
     cin >> opcion;
     switch (opcion)
     {
@@ -31,32 +87,6 @@ void menu()
         cout << ":c Intente de nuevo" << endl;
         menu();
     }
-}
-
-void opcion1()
-{
-    // 1. Añadir nueva ruta
-}
-void opcion2()
-{
-    // 2. elegir punto de partida y destino
-}
-void opcion3()
-{
-    // 3. Viaje rapido
-}
-void opcion4()
-{
-    // 4. Viaje Económico
-}
-void salir()
-{
-    // 5. Salir del Programa
-}
-
-int main()
-{
-    menu();
 
     return 0;
 }
