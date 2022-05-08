@@ -4,6 +4,7 @@ using namespace std;
 
 vector<pair <int,int> > grafoM[100000], grafoT[100000];
 map<string, int> Lugar;
+dij()
 int main(){
     int aris, vertices, costo, tiempo, a, b;
     cin >> aris >> vertices;
