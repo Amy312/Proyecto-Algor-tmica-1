@@ -15,6 +15,7 @@ int main(){
 
     cout << "Día 2_ Aún no se arruino nada :D" << endl;
 
+    cout << "Dia 3_ todo va mal :'("<<endl;
     
 }
 
