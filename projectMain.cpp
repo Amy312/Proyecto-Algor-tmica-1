@@ -49,10 +49,9 @@ void opcion4()
 {
     // 4. Viaje Económico
 }
-
 void salir()
 {
-    // 6. Salir del Programa
+    // 5. Salir del Programa
 }
 
 int main()
