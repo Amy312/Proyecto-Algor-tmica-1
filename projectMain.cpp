@@ -69,6 +69,7 @@ void agregar_nodo_arista()
         archivo << ini << " " << lugar << endl;
         archivo.close();
     }
+    
     if (nombre_lugares[fin] == "")
     {
         cout << "Ups! parece que tu lugar de llegada no tiene nombre, agrégale uno:" << endl;
