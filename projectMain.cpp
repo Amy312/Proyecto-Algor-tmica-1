@@ -33,9 +33,10 @@ void leer_lugares(){
     archivo.open("nombre_lugares.txt", fstream::in);
 
     int num;
-    string lugar;
-    while (cin>>num>>lugar)
+    char lugar[100];
+    while (archivo>>num)
     {
+        archivo.getline(lugar,100);
         nombre_lugares[num]=lugar;
     }
     
@@ -62,20 +63,24 @@ void lugares(){
     
     for (int i = 0; i < nombre_lugares.size(); i++)
     {
-        cout<<
+        if (nombre_lugares[i]!="")
+        {
+            cout<<i<<". "<<nombre_lugares[i]<<endl;
+        }
+        
     }
     
     
-    cout << "1. Campus UPB" << endl;
-    cout << "2. Plaza Humboldt" << endl;
-    cout << "3. MegaCenter" << endl;
-    cout << "4. Iglesia de San Miguel" << endl;
-    cout << "5. UPB Post Grado" << endl;
-    cout << "6. Monobloc UMSA" << endl;
-    cout << "7. Estadio Hernando Siles" <<endl;
-    cout << "8. Plaza del Estudiante" <<endl;
-    cout << "9. Terminal de Buses" <<endl;
-    cout << "10. Aeropuerto Internacional El Alto" <<endl;
+    // cout << "1. Campus UPB" << endl;
+    // cout << "2. Plaza Humboldt" << endl;
+    // cout << "3. MegaCenter" << endl;
+    // cout << "4. Iglesia de San Miguel" << endl;
+    // cout << "5. UPB Post Grado" << endl;
+    // cout << "6. Monobloc UMSA" << endl;
+    // cout << "7. Estadio Hernando Siles" <<endl;
+    // cout << "8. Plaza del Estudiante" <<endl;
+    // cout << "9. Terminal de Buses" <<endl;
+    // cout << "10. Aeropuerto Internacional El Alto" <<endl;
 }
 
 void opcion1()
@@ -101,14 +106,14 @@ void opcion3()
     cout << "Viaje Rápido" << endl;
     cout << "Elija el punto de destino" << endl;  
     //Dijkstra tiempo
-    cout << "El tiempo en llegar a su destino es de: "<< << " minutos pero tendra un costo de: Bs." << <<endl;
+    cout << "El tiempo en llegar a su destino es de: "<< 0<< " minutos pero tendra un costo de: Bs." << 0<<endl;
 }
 void opcion4()
 {
     // 4. Viaje Económico
     cout << "Viaje Económico"<<endl;
     //Dijkstra precio
-    cout << "El costo mas barato para llegar a su destino es de: Bs."<< << " pero el tiempo sera de: " << <<"minutos"<<endl;
+    cout << "El costo mas barato para llegar a su destino es de: Bs."<< 0<< " pero el tiempo sera de: " << 0<<"minutos"<<endl;
 }
 void salir()
 {
@@ -121,23 +126,28 @@ void salir()
 
 void menu()
 {
-    cout << "         -=Effective Paths=-" << endl;
+    cout << "========================================" << endl;
+    cout << "|        -=Effective Paths=-           |"<< endl;
     cout << "========================================" << endl;
     cout << "| 0. Lista de lugares predeterminados  |" << endl;
-    cout << "| 1. Añadir nueva ruta                |" << endl;
-    cout << "| 2. Elegir punto de partida y destino" << endl;
-    cout << "| 3. Viaje Rápido" << endl;
-    cout << "| 4. Viaje Económico" << endl;
-    cout << "| 5. Salir del Programa" << endl;
-    cout << "======================================" << endl;
+    cout << "| 1. Añadir nueva ruta                 |" << endl;
+    cout << "| 2. Elegir punto de partida y destino |" << endl;
+    cout << "| 3. Viaje Rápido                      |" << endl;
+    cout << "| 4. Viaje Económico                   |" << endl;
+    cout << "| 5. Salir del Programa                |" << endl;
+    cout << "========================================" << endl;
 }
 
 int main()
 {
     //menu();
-        int opcion;
+    leer_lugares();
+    leer_grafo();
+
+    int opcion;
     menu();
     cin >> opcion;
+    cout << "========================================" << endl;
     switch (opcion)
     {
     case 0:
