@@ -1,169 +1,272 @@
 #include <bits/stdc++.h>
-
+#define INF 100000010 // 1e9
 using namespace std;
 /**
 Menu
 **/
 
-vector<pair<int, int> > grafoPrecio[20];
-vector<pair<int, int> > grafoTiempo[20];
-vector<string> nombre_lugares(20);
+vector<pair<int, int> > grafoPrecio[1000];
+vector<pair<int, int> > grafoTiempo[1000];
+vector<string> nombre_lugares(1000);
 
-void leer_grafo(){
+void leer_grafo()
+{
     ifstream archivo;
     archivo.open("grafo.txt", fstream::in);
 
     int ini, fin, precio, tiempo;
     while (archivo >> ini >> fin >> precio >> tiempo)
     {
-        
+
         grafoPrecio[ini].push_back(make_pair(precio, fin));
         grafoPrecio[fin].push_back(make_pair(precio, ini));
-        
+
         grafoTiempo[ini].push_back(make_pair(tiempo, fin));
         grafoTiempo[fin].push_back(make_pair(tiempo, ini));
         // grafoMat[ini][fin]=peso;
         // grafoMat[fin][ini]=peso;
-
     }
 }
 
-void leer_lugares(){
+void leer_lugares()
+{
     ifstream archivo;
     archivo.open("nombre_lugares.txt", fstream::in);
 
     int num;
     char lugar[100];
-    while (archivo>>num)
+    while (archivo >> num)
     {
-        archivo.getline(lugar,100);
-        nombre_lugares[num]=lugar;
+        archivo.getline(lugar, 100);
+        nombre_lugares[num] = lugar;
     }
-    
 }
 
-void agregar_nodo_arista(){
+void agregar_nodo_arista()
+{
     ofstream archivo;
     archivo.open("grafo.txt", fstream::app);
-    int ini,fin, precio, tiempo;
-    cin >> ini >> fin >> precio>> tiempo;
-    
+    int ini, fin, precio, tiempo;
+    cin >> ini >> fin >> precio >> tiempo;
+
+    archivo << ini << " " << fin << " " << precio << " " << tiempo << endl;
+    archivo.close();
+
     grafoPrecio[ini].push_back(make_pair(precio, fin));
     grafoPrecio[fin].push_back(make_pair(precio, ini));
-    //:D
+    //: D
     grafoTiempo[ini].push_back(make_pair(tiempo, fin));
     grafoTiempo[fin].push_back(make_pair(tiempo, ini));
-    // grini][fin]=peso;//arreglalo :3
-    // grafoMat[fin][ini]=peso;
-    archivo << ini <<" "<< fin <<" " << precio<<" " << tiempo <<endl;
-    archivo.close();
+
+    if (nombre_lugares[ini] == "")
+    {
+        cout << "Ups! parece que tu lugar de partida no tiene nombre, agrégale uno:" << endl;
+        string lugar;
+        cin.ignore();
+        getline(cin,lugar);
+        nombre_lugares[ini] = lugar;
+        archivo.open("nombre_lugares.txt", fstream::app);
+        archivo << ini << " " << lugar << endl;
+        archivo.close();
+    }
+    if (nombre_lugares[fin] == "")
+    {
+        cout << "Ups! parece que tu lugar de llegada no tiene nombre, agrégale uno:" << endl;
+        string lugar;
+        cin.ignore();
+        getline(cin,lugar);
+        nombre_lugares[fin] = lugar;
+        archivo.open("nombre_lugares.txt", fstream::app);
+        archivo << fin << " " << lugar << endl;
+        archivo.close();
+    }
 }
 
-void lugares(){
-    
+void lugares()
+{
+
     for (int i = 0; i < nombre_lugares.size(); i++)
     {
-        if (nombre_lugares[i]!="")
+        if (nombre_lugares[i] != "")
         {
-            cout<<i<<". "<<nombre_lugares[i]<<endl;
+            cout << i << ". " << nombre_lugares[i] << endl;
         }
-        
     }
-    
-    
-    // cout << "1. Campus UPB" << endl;
-    // cout << "2. Plaza Humboldt" << endl;
-    // cout << "3. MegaCenter" << endl;
-    // cout << "4. Iglesia de San Miguel" << endl;
-    // cout << "5. UPB Post Grado" << endl;
-    // cout << "6. Monobloc UMSA" << endl;
-    // cout << "7. Estadio Hernando Siles" <<endl;
-    // cout << "8. Plaza del Estudiante" <<endl;
-    // cout << "9. Terminal de Buses" <<endl;
-    // cout << "10. Aeropuerto Internacional El Alto" <<endl;
 }
 
 void opcion1()
 {
     // 1. Añadir nueva ruta
-    int ini, fin ,peso;
+    int ini, fin, peso;
     cout << "Elija los caminos por donde realizara su nueva ruta" << endl;
-    cout << "Inicio - Final - Precio" << endl;
+    cout << "Inicio - Final - Precio - Tiempo" << endl;
     agregar_nodo_arista();
-
 }
-void opcion2()
+
+int visitados[1000], nivel[1000][3];
+void dijkstra(int verticeInicial, bool sw)
 {
-    // 2. elegir punto de partida y destino
+    memset(nivel, 0 ,sizeof(nivel));
+    for(int i = 0; i < 1000; i++){
+        nivel[i][2] = INF;
+    }
+    memset(visitados, 0, sizeof(visitados));
+
+    multiset<pair<int, int> > colaPrioridad; // log(n)sk
+    nivel[verticeInicial][2] = 0;
+    colaPrioridad.insert(make_pair(0, verticeInicial));
+        vector<pair<int, int> > *grafo1;
+        vector<pair<int, int> > *grafo5; 
+    if(!sw){
+        grafo1 = grafoPrecio;
+        grafo5 = grafoTiempo;
+    }else{
+        grafo5 = grafoPrecio; 
+        grafo1 = grafoTiempo;
+    }
+
+    while (!colaPrioridad.empty())
+    {
+        pair<int, int> verticeActual = *colaPrioridad.begin();
+        colaPrioridad.erase(colaPrioridad.begin()); 
+        int vertice = verticeActual.second;
+        if (!visitados[vertice])
+        {
+            visitados[vertice] = true;
+            for (int i = 0; i < grafo1[vertice].size(); i++)
+            {
+                int verticeVecino = grafo1[vertice][i].second;
+                int pesoVecino = grafo1[vertice][i].first;
+                //    inf  >                    0 + 60
+                // Relajacion 
+                if (nivel[verticeVecino][2]> nivel[vertice][2] + pesoVecino )
+                {
+                    nivel[verticeVecino][2] = nivel[vertice][2] + pesoVecino;
+                    nivel[verticeVecino][1] = vertice;
+                    nivel[verticeVecino][0] = nivel[vertice][0]+ grafo5[vertice][i].first;
+                    colaPrioridad.insert(make_pair(nivel[verticeVecino][2], verticeVecino));
+                }
+            }
+        }
+    }
+}
+
+void opcion2() // 2. Viaje rapido
+{
+    //sw = 1;
+    cout << "Viaje Rápido" << endl;
     int origen, destino;
     cout << "Elija el punto de partida y el destino" << endl;
     cin >> origen >> destino;
-}
-void opcion3()
-{
-    // 3. Viaje rapido
-    int destino;
-    cout << "Viaje Rápido" << endl;
-    cout << "Elija el punto de destino" << endl;  
-    //Dijkstra tiempo
-    cout << "El tiempo en llegar a su destino es de: "<< 0<< " minutos pero tendra un costo de: Bs." << 0<<endl;
-}
-void opcion4()
-{
-    // 4. Viaje Económico
-    cout << "Viaje Económico"<<endl;
-    //Dijkstra precio
-    cout << "El costo mas barato para llegar a su destino es de: Bs."<< 0<< " pero el tiempo sera de: " << 0<<"minutos"<<endl;
-}
-void salir()
-{
-    // 5. Salir del Programa
-    cout << "Saliendo del Programa" << endl;
-    cout << "Gracias por utilizar Effective Paths"<<endl;
-    cout << "¡Hasta pronto! :D" << endl;
-}
+    dijkstra(origen, 1);
+    if (visitados[destino])
+    {
 
+        int punto = destino;
+        vector<int> Ruta;
+        Ruta.push_back(destino);
+        do{
+            Ruta.push_back(nivel[punto][1]);
+            punto = nivel[punto][1];
+        } while (punto != origen);
+        cout << "El tiempo en llegar a su destino es de: " << nivel[destino][2] << " minutos pero tendra un costo de: Bs." << nivel[destino][0] << endl;
+        for (int i = Ruta.size() - 1; i >= 1; i--)
+        {
+            cout << Ruta[i] << " --> ";
+        }
+        cout << Ruta[0] << endl;
+    }
+    else
+    {
+        cout << "No hay camino :c" << endl;
+    }
+    // Dijkstra tiempo
+    
+}
+void opcion3() // 3. Viaje Económico
+{
+    //sw = 0
+    cout << "Viaje Económico" << endl;
+    int origen, destino;
+    cout << "Elija el punto de partida y el destino" << endl;
+    cin >> origen >> destino;
+    dijkstra(origen, 0);
+    if (visitados[destino])
+    {
+
+        int punto = destino;
+        vector<int> Ruta;
+        Ruta.push_back(destino);
+        do
+        {
+            Ruta.push_back(nivel[punto][1]);
+            punto = nivel[punto][1];
+        } while (punto != origen);
+        cout << "El costo mas barato para llegar a su destino es de: Bs." << nivel[destino][2] << " pero el tiempo sera de: " << nivel[destino][0] << "minutos" << endl;
+        for (int i = Ruta.size() - 1; i >= 1; i--)
+        {
+            cout << Ruta[i] << " --> ";
+        }
+        cout << Ruta[0] << endl;
+    }
+    else
+    {
+        cout << "No hay camino :c" << endl;
+    }
+
+    // Dijkstra precio
+    
+}
 
 void menu()
 {
     cout << "========================================" << endl;
-    cout << "|        -=Effective Paths=-           |"<< endl;
+    cout << "|          -=Effective Paths=-         |" << endl;
     cout << "========================================" << endl;
     cout << "| 0. Lista de lugares predeterminados  |" << endl;
     cout << "| 1. Añadir nueva ruta                 |" << endl;
-    cout << "| 2. Elegir punto de partida y destino |" << endl;
-    cout << "| 3. Viaje Rápido                      |" << endl;
-    cout << "| 4. Viaje Económico                   |" << endl;
-    cout << "| 5. Salir del Programa                |" << endl;
+    cout << "| 2. Viaje Rápido                      |" << endl;
+    cout << "| 3. Viaje Económico                   |" << endl;
+    cout << "| 4. Salir del Programa                |" << endl;
     cout << "========================================" << endl;
-}
-
-int main()
-{
-    //menu();
-    leer_lugares();
-    leer_grafo();
 
     int opcion;
-    menu();
     cin >> opcion;
     cout << "========================================" << endl;
     switch (opcion)
     {
     case 0:
         lugares();
+        break;
     case 1:
         opcion1();
+        break;
     case 2:
         opcion2();
+        break;
     case 3:
         opcion3();
+        break;
     case 4:
-        opcion4();
-    case 5:
-        salir();
+        cout << "Saliendo del Programa" << endl;
+        cout << "Gracias por utilizar Effective Paths" << endl;
+        cout << "¡Hasta pronto! :D" << endl;
+        exit(1);
+        break;
     default:
         cout << "Opcion invalida, por favor vuelva a intentar." << endl;
+        break;
+        // menu();
+    }
+}
+
+int main()
+{
+    leer_lugares();
+    leer_grafo();
+
+    while (1)
+    {
         menu();
     }
 

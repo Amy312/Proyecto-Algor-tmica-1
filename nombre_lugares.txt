@@ -1,0 +1,10 @@
+0 Campus UPB
+1 Plaza Humboldt
+2 MegaCenter
+3 Iglesia de San Miguel
+4 UPB Post Grado
+5 Monobloc UMSA
+6 Estadio Hernando Siles
+7 Plaza del Estudiante
+8 Terminal de Buses
+9 Aeropuerto Internacional El Alto
