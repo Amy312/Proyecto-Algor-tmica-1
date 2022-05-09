@@ -1,10 +1,11 @@
 #include <bits/stdc++.h>
 #define INF 100000010 // 1e9 
+#define input freopen("in.txt", "r", stdin)
 
 //opcion 3 y 4
 using namespace std;
 
-vector<pair <int,int> > grafoM[100000], grafoT[100000];
+vector<pair <int,int> > grafoPrecio[100000], grafoT[100000];
 int visitados[100000]; 
 int distancia[100000];
 void dij(int verticeInicial)
@@ -28,27 +29,32 @@ void dij(int verticeInicial)
         if (!visitados[vertice])
         {
             visitados[vertice] = true;
-            for (int i = 0; i < grafoM[vertice].size(); i++)
+            for (int i = 0; i < grafoPrecio[vertice].size(); i++)
             {
-                int verticeVecino = grafoM[vertice][i].second;
-                int pesoVecino = grafoM[vertice][i].first;
+                int verticeVecino = grafoPrecio[vertice][i].second;
+                int pesoVecino = grafoPrecio[vertice][i].first;
                 //    inf  >                    0 + 60
                 // Relajacion 
                 if (distancia[verticeVecino]> distancia[vertice] + pesoVecino )
                 {
                     distancia[verticeVecino] = distancia[vertice] + pesoVecino;
                     colaPrioridad.insert(make_pair(distancia[verticeVecino], verticeVecino));
+                    cout << distancia[verticeVecino] << " " << verticeVecino << endl;
                 }
             }
         }
     }
 }
 int main(){
-    int aris, vertices, costo, tiempo, a, b;
+    input;
+    int aris, vertices, precio, tiempo;
+    char a, b;
     cin >> aris >> vertices;
     for(int i=0; i<vertices; i++){
-        cin >> a>> b>> costo >> tiempo;
-        grafoM[a].push_back(make_pair(costo, b));
+        cin >> a>> b>> precio >> tiempo;
+        grafoPrecio[a-'A'].push_back(make_pair(precio, b-'A'));
+        grafoPrecio[b-'A'].push_back(make_pair(precio, a-'A'));
+
     }
     int inicio, destino;
     cin >> inicio >> destino;
