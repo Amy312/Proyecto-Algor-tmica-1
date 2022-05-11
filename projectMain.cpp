@@ -171,11 +171,12 @@ void opcion2() // 2. Viaje rapido
             punto = nivel[punto][1];
         } while (punto != origen);
         cout << "El tiempo en llegar a su destino es de: " << nivel[destino][2] << " minutos pero tendra un costo de: Bs." << nivel[destino][0] << endl;
+        cout << "Debera seguir la siguiente ruta:" << endl;
         for (int i = Ruta.size() - 1; i >= 1; i--)
         {
-            cout << Ruta[i] << " --> ";
+            cout << nombre_lugares[Ruta[i]] << " --> ";
         }
-        cout << Ruta[0] << endl;
+        cout << nombre_lugares[Ruta[0]] << endl;
     }
     else
     {
@@ -203,12 +204,13 @@ void opcion3() // 3. Viaje Económico
             Ruta.push_back(nivel[punto][1]);
             punto = nivel[punto][1];
         } while (punto != origen);
-        cout << "El costo mas barato para llegar a su destino es de: Bs." << nivel[destino][2] << " pero el tiempo sera de: " << nivel[destino][0] << "minutos" << endl;
+        cout << "El costo mas barato para llegar a su destino es de: Bs." << nivel[destino][2] << " pero el tiempo sera de: " << nivel[destino][0] << " minutos" << endl;
+        cout << "Debera seguir la siguiente ruta:" << endl;
         for (int i = Ruta.size() - 1; i >= 1; i--)
         {
-            cout << Ruta[i] << " --> ";
+            cout << nombre_lugares[Ruta[i]] << " --> ";
         }
-        cout << Ruta[0] << endl;
+        cout << nombre_lugares[Ruta[0]] << endl;
     }
     else
     {
