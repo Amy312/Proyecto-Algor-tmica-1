@@ -205,7 +205,10 @@ void opcion3() // 3. Viaje Económico
             punto = nivel[punto][1];
         } while (punto != origen);
         cout << "El costo mas barato para llegar a su destino es de: Bs." << nivel[destino][2] << " pero el tiempo sera de: " << nivel[destino][0] << " minutos" << endl;
+<<<<<<< HEAD
         cout << "Debera seguir la siguiente ruta:" << endl;
+=======
+>>>>>>> 45e7147b5618169177191da68492d484c07cc788
         for (int i = Ruta.size() - 1; i >= 1; i--)
         {
             cout << nombre_lugares[Ruta[i]] << " --> ";
