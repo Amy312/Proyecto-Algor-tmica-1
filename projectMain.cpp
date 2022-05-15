@@ -229,8 +229,8 @@ void menu()
     cout << "========================================" << endl;
     cout << "| 0. Lista de lugares                  |" << endl;
     cout << "| 1. Agregar nueva ruta                |" << endl;
-    cout << "| 2. Viaje Rápido                      |" << endl;
-    cout << "| 3. Viaje Económico                   |" << endl;
+    cout << "| 2. Viaje Rapido                      |" << endl;
+    cout << "| 3. Viaje Economico                   |" << endl;
     cout << "| 4. Salir del Programa                |" << endl;
     cout << "========================================" << endl;
 
