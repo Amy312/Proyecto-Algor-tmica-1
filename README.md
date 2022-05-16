@@ -8,6 +8,8 @@ Apretar en **Code** y después en **Download zip**
 Una vez descargado el comprimido, descomprímalo y abra **projectMain.cpp** con su editor de código de preferencia.
 
 [![img2.jpg](https://i.postimg.cc/bwSnH2pM/img2.jpg)](https://postimg.cc/9DVzc04t)
+
+Nota: tutorial de como **Instalar Visual Studio Code** y compilar archivos .cpp: https://code.visualstudio.com/docs/languages/cpp
 ## Paso 3:
 Al ejecutar el código se creará  **projectMain.exe**, de ese modo podrá abrir el programa sin tener que volver a ejecutar el código.
 
