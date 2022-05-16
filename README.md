@@ -12,7 +12,7 @@ Una vez descargado el comprimido, descomprímalo y abra **projectMain.cpp** con 
 Al ejecutar el código se creará  **projectMain.exe**, de ese modo podrá abrir el programa sin tener que volver a ejecutar el código.
 
 [![img3.jpg](https://i.postimg.cc/7LgTj8Cn/img3.jpg)](https://postimg.cc/WD13Jywd)
-##Paso 4:
+## Paso 4 y final:
 AL iniciar se verá el menu por lo que ya podrá utilizar la herramienta a su gusto ;D
 
 [![img4.jpg](https://i.postimg.cc/J0t0r9hg/img4.jpg)](https://postimg.cc/m1fBVpCN)
