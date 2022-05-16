@@ -1,2 +1,1 @@
-Ahi ta el proyecto pol :D
-Siga las instrucciones del programa :D
+#Proceso de instalación de Effective Paths
