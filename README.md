@@ -10,6 +10,7 @@ Una vez descargado el comprimido, descomprímalo y abra **projectMain.cpp** con 
 [![img2.jpg](https://i.postimg.cc/bwSnH2pM/img2.jpg)](https://postimg.cc/9DVzc04t)
 
 Nota: tutorial de como **Instalar Visual Studio Code** y compilar archivos .cpp: https://code.visualstudio.com/docs/languages/cpp
+Video guía para Windows: https://youtu.be/7QvNY9245hY
 ## Paso 3:
 Al ejecutar el código se creará  **projectMain.exe**, de ese modo podrá abrir el programa sin tener que volver a ejecutar el código.
 
